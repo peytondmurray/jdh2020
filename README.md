@@ -50,6 +50,12 @@ These Python scripts were all run inside blender.
   of the final overlay was done here, with the exception of the simulation
   timer and the axes lines.
 
+## Data
+The data produced by the simulation was ~8 Gb uncompressed, ~5 Gb compressed
+with zstd. I therefore couldn't upload it to GitHub and have instead uploaded
+it to Google Drive [here][data].
+
 [mumax]: https://github.com/mumax/3
 [inkscape]: https://inkscape.org/
 [blender]: https://www.blender.org/
+[data]: https://drive.google.com/drive/folders/1kr2lGojhMgFVmm6xS8l3tp2JAheJIBAR?usp=sharing
