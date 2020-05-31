@@ -1,3 +1,19 @@
+"""When keyframing rotations using quaternions in blender, the automatically
+generated fcurves sometimes set erroneous orientations. As far as I can tell,
+this arises from the fact that the method that blender uses to interpolate
+between keyframes is not rotation-aware. As a simplified example, if
+
+    Keyframe 1: orientation angle = 2°
+    Keyframe 2: orientation angle = 358°
+
+blender sets the orientation angle 180° at the frame in between the keyframes,
+rather than 0° (as it should be).
+
+This script examines every fcurve searching for these erroneous orientations,
+and flips the object if need be.
+
+Modified from https://blender.stackexchange.com/questions/58866/keyframe-interpolation-instability
+"""
 import bpy
 from mathutils import Quaternion
 import tqdm
