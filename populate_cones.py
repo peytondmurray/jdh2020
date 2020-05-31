@@ -1,3 +1,7 @@
+"""Generate the array of cones representing the magnetization at each simulation cell. Then, animate
+the cones to orient in the direction of the magnetization; also animate the material color of each cone
+to map the z-component of the orientation to colors using Matplotlib's RdBu_r colormap.
+"""
 import bpy
 import mathutils
 import numpy as np
@@ -5,13 +9,15 @@ import matplotlib.cm as cm
 import tqdm
 
 scale = 0.5     # Set the physical scale of the animation
-step = 11       # Only show every 39th cone; this can be lowered depending on computer resources
+step = 11       # Only show every 11th cone; this can be lowered depending on computer resources
 time_dilation_factor = 10   # Set the number of animation frames between each keyframe
 
 # Load the data and get the number of cones in each dimension
 data = np.load('data.npy')
 nz, ny, nx = data.shape[1:4]
 
+# Get the current selected object. The user is expected to have generated this "master" cone with the
+# desired geometry; this script only copies it to the locations given by the simulation data, and animates them.
 master_cone = bpy.context.active_object
 master_cone.rotation_mode = 'QUATERNION'
 scene = bpy.context.scene
