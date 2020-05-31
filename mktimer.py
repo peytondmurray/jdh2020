@@ -1,6 +1,8 @@
 """This script generates a set of 2560x1440 images which are mostly transparent
 except for a timer in the top left. This timer shows the simulation time of the
-frame currently being displayed.
+frame currently being displayed. Although the total mumax simulation ran for
+1000 ns, after the first 96 ns (corresponding to 480 mumax output files) the
+domain wall annihilated, so I clipped the final rendered animation short.
 
 The images generated here are then overlayed on top of the animation of the
 simulation using blender's Video Editing tab.
@@ -12,6 +14,9 @@ from PIL import Image, ImageDraw, ImageFont
 def render_frame(i, frame_start, frame_end):
     """Generate an image displaying the current simulation time.
 
+    The animation contains simulation data from the first 96 ns of the
+    simulation.
+
     Parameters
     ----------
     i : int
@@ -22,7 +27,7 @@ def render_frame(i, frame_start, frame_end):
         Index of the frame the simulation animation stops playing
     """
 
-    sim_time_ns = 1000*(i - frame_start)/(frame_end-frame_start)
+    sim_time_ns = 96*(i - frame_start)/(frame_end-frame_start)
     img = Image.new('RGBA', (2560, 1440), color=(0, 0, 0, 0))
     fnt = ImageFont.truetype('/usr/share/fonts/OTF/FiraCode-Regular.otf', 60)
     d = ImageDraw.Draw(img)
